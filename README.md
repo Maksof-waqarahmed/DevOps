@@ -1,4 +1,3 @@
-```markdown
 # 🚀 DevOps Mastery Journey
 
 **Course Incharge**: Muzammil Bilwani  
@@ -79,6 +78,5 @@ Let’s connect on [LinkedIn](https://www.linkedin.com/in/waqarranadev/) and gro
 ---
 
 > _"DevOps is not a goal, but a never-ending process of continual improvement."_ – Jez Humble
-```
 
 ---

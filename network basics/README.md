@@ -388,62 +388,99 @@ HTTP status codes indicate the result of a request.
 
 ### **1xx – Informational**
 
-| Code | Meaning             |
-| ---- | ------------------- |
-| 100  | Continue            |
-| 101  | Switching Protocols |
-| 102  | Processing          |
-| 103  | Early Hints         |
+| Code    | Meaning                                                                    |
+| ------- | -------------------------------------------------------------------------- |
+| **100** | Continue – Server has accepted the initial request, client should continue |
+| **101** | Switching Protocols – Request to change protocol accepted                  |
+| **102** | Processing – Server is still processing the request (WebDAV)               |
+| **103** | Early Hints – Response headers sent first, body will come later            |
 
 ---
 
 ### **2xx – Success**
 
-| Code | Meaning         |
-| ---- | --------------- |
-| 200  | OK              |
-| 201  | Created         |
-| 202  | Accepted        |
-| 204  | No Content      |
-| 206  | Partial Content |
+| Code    | Meaning                                                           |
+| ------- | ----------------------------------------------------------------- |
+| **200** | OK – Request successful                                           |
+| **201** | Created – A new resource has been created                         |
+| **202** | Accepted – Request accepted, but will be processed later          |
+| **203** | Non-Authoritative Information – Data is from a third-party source |
+| **204** | No Content – Request successful but no content sent               |
+| **205** | Reset Content – Client should reset their view                    |
+| **206** | Partial Content – Only part of the data sent (range requests)     |
+| **207** | Multi-Status – Multiple status values (WebDAV)                    |
+| **208** | Already Reported – Avoiding duplicate information (WebDAV)        |
+| **226** | IM Used – Result of delta encoding returned                       |
 
 ---
 
 ### **3xx – Redirection**
 
-| Code | Meaning            |
-| ---- | ------------------ |
-| 301  | Moved Permanently  |
-| 302  | Found              |
-| 304  | Not Modified       |
-| 307  | Temporary Redirect |
-| 308  | Permanent Redirect |
+| Code    | Meaning                                                            |
+| ------- | ------------------------------------------------------------------ |
+| **300** | Multiple Choices – Multiple versions of the resource               |
+| **301** | Moved Permanently – Resource permanently moved to a new URL        |
+| **302** | Found – Temporary redirect                                         |
+| **303** | See Other – Fetch the resource using the GET method                |
+| **304** | Not Modified – Cache data is still valid, no need to fetch again   |
+| **305** | Use Proxy – Access the resource through a proxy                    |
+| **306** | (Unused) – Previously used for proxy requirement                   |
+| **307** | Temporary Redirect – Redirect using the same method                |
+| **308** | Permanent Redirect – Permanent redirect preserving method and body |
 
 ---
 
 ### **4xx – Client Errors**
 
-| Code | Meaning                       |
-| ---- | ----------------------------- |
-| 400  | Bad Request                   |
-| 401  | Unauthorized                  |
-| 403  | Forbidden                     |
-| 404  | Not Found                     |
-| 405  | Method Not Allowed            |
-| 429  | Too Many Requests             |
-| 451  | Unavailable for Legal Reasons |
+| Code    | Meaning                                                       |
+| ------- | ------------------------------------------------------------- |
+| **400** | Bad Request – Invalid request syntax                          |
+| **401** | Unauthorized – Login/Authentication required                  |
+| **402** | Payment Required – (Rare, reserved for future use)            |
+| **403** | Forbidden – Access not allowed                                |
+| **404** | Not Found – Resource does not exist                           |
+| **405** | Method Not Allowed – HTTP method not allowed                  |
+| **406** | Not Acceptable – Server cannot match client’s Accept headers  |
+| **407** | Proxy Authentication Required – Proxy authentication needed   |
+| **408** | Request Timeout – Server waited too long                      |
+| **409** | Conflict – Conflict in the resource state                     |
+| **410** | Gone – Resource permanently deleted                           |
+| **411** | Length Required – Content-Length header missing               |
+| **412** | Precondition Failed – Condition did not match                 |
+| **413** | Payload Too Large – Request body exceeds size limit           |
+| **414** | URI Too Long – URL length too long                            |
+| **415** | Unsupported Media Type – File format not supported            |
+| **416** | Range Not Satisfiable – Requested range not available         |
+| **417** | Expectation Failed – Expect header requirement not met        |
+| **418** | I'm a Teapot – (Joke code, April Fools, RFC 2324)             |
+| **421** | Misdirected Request – Server sent request to the wrong target |
+| **422** | Unprocessable Entity – Semantic errors (WebDAV)               |
+| **423** | Locked – Resource locked (WebDAV)                             |
+| **424** | Failed Dependency – Previous request failed (WebDAV)          |
+| **425** | Too Early – Risk in processing the request                    |
+| **426** | Upgrade Required – Client must upgrade the protocol           |
+| **428** | Precondition Required – Missing precondition in request       |
+| **429** | Too Many Requests – Client exceeded request limit             |
+| **431** | Request Header Fields Too Large – Header size too large       |
+| **451** | Unavailable For Legal Reasons – Blocked due to legal reasons  |
 
 ---
 
 ### **5xx – Server Errors**
 
-| Code | Meaning               |
-| ---- | --------------------- |
-| 500  | Internal Server Error |
-| 502  | Bad Gateway           |
-| 503  | Service Unavailable   |
-| 504  | Gateway Timeout       |
-| 507  | Insufficient Storage  |
+| Code    | Meaning                                                                |
+| ------- | ---------------------------------------------------------------------- |
+| **500** | Internal Server Error – Server code crashed                            |
+| **501** | Not Implemented – Feature not supported                                |
+| **502** | Bad Gateway – Issue with proxy server                                  |
+| **503** | Service Unavailable – Server overload or maintenance                   |
+| **504** | Gateway Timeout – Server took too long to respond                      |
+| **505** | HTTP Version Not Supported – Protocol version not supported            |
+| **506** | Variant Also Negotiates – Configuration loop detected                  |
+| **507** | Insufficient Storage – Not enough space on the server (WebDAV)         |
+| **508** | Loop Detected – Infinite loop detected (WebDAV)                        |
+| **510** | Not Extended – More extensions required                                |
+| **511** | Network Authentication Required – Network login needed (Wi-Fi portals) |
 
 ---
 

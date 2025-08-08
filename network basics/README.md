@@ -1,5 +1,4 @@
-# 📄 README – Domain, DNS & Hosting
-
+# 📄 Domain, DNS & Hosting
 ## **1. What is a Domain?**
 
 A **domain** is a unique **human-readable name** used to identify a website or resource on the internet.
@@ -197,3 +196,316 @@ graph TD
     J --> K[Web Server Response]
     K --> L[Browser Renders Page]
 ```
+
+# Ports, SSL / TLS & SSH
+
+## 1. **Ports**
+
+A **Port** is a **logical endpoint** used to identify a specific service or application running on a device or server.
+When data travels over a network:
+
+* **IP Address** → Identifies **which device** should receive the data.
+* **Port Number** → Identifies **which application/service** on that device should handle the data.
+
+**Analogy:**
+
+* **IP address** = House address
+* **Port number** = Room number inside the house
+
+---
+
+### 1.1 **Port Number Range**
+
+Ports are numbered **0–65535** and are divided into three categories:
+
+1. **Well-known ports (0–1023)** – Reserved for common services.
+
+   | Port | Service | Description          |
+   | ---- | ------- | -------------------- |
+   | 80   | HTTP    | Websites without SSL |
+   | 443  | HTTPS   | Websites with SSL    |
+   | 22   | SSH     | Secure remote login  |
+   | 25   | SMTP    | Email sending        |
+
+2. **Registered ports (1024–49151)** – Can be registered for specific applications.
+
+3. **Dynamic/Ephemeral ports (49152–65535)** – Temporarily assigned by the OS for short-lived connections.
+
+---
+
+### 1.2 **How Ports Work**
+
+1. You send a request to a server via a domain or IP.
+2. The request includes a **port number**.
+3. The server’s OS forwards the data to the application listening on that port.
+
+**Example:**
+
+```text
+http://example.com:80
+https://example.com:443
+ssh user@example.com -p 22
+```
+
+If no port is specified, the default is used (HTTP = 80, HTTPS = 443).
+
+---
+
+### 1.3 **Common Ports Reference Table**
+
+| Port  | Protocol         | Use                          |
+| ----- | ---------------- | ---------------------------- |
+| 20/21 | FTP              | File Transfer                |
+| 22    | SSH              | Secure remote login          |
+| 25    | SMTP             | Email sending                |
+| 53    | DNS              | Domain resolution            |
+| 80    | HTTP             | Web traffic                  |
+| 110   | POP3             | Email receiving              |
+| 143   | IMAP             | Email receiving              |
+| 443   | HTTPS            | Secure web traffic           |
+| 3306  | MySQL            | Database                     |
+| 5432  | PostgreSQL       | Database                     |
+| 6379  | Redis            | In-memory DB                 |
+| 8080  | HTTP alternative | Dev environments/web servers |
+
+---
+
+**Common Commands:**
+
+```bash
+# List listening ports
+netstat -tulnp
+ss -tulnp
+
+# Test a specific port
+nc -zv example.com 443
+
+# Test using telnet
+telnet example.com 443
+```
+
+---
+
+## 2. **SSL / TLS**
+
+**SSL (Secure Sockets Layer)** is a protocol for encrypting internet communication.
+It ensures:
+
+1. **Data encryption** – Prevents eavesdropping.
+2. **Authentication** – Confirms server identity.
+3. **Integrity** – Prevents data tampering.
+
+⚠️ SSL is outdated; today we use **TLS (Transport Layer Security)**, but it’s still called “SSL certificate” in common language.
+
+---
+
+### 2.1 **SSL Certificate**
+
+An SSL certificate is a digital file containing:
+
+* Domain name
+* Issuer (Certificate Authority)
+* Expiry date
+* **Public key** for encryption
+
+Example:
+
+```text
+-----BEGIN CERTIFICATE-----
+MIIDdzCCAl+gAwIBAgE...
+-----END CERTIFICATE-----
+```
+
+---
+
+### 2.2 **How HTTPS Uses SSL/TLS**
+
+1. Browser connects to server on **port 443**.
+2. Server sends its **SSL certificate**.
+3. Browser verifies:
+
+   * Signature (via Certificate Authority)
+   * Domain match
+   * Validity/expiry
+4. If valid:
+
+   * Browser and server perform **TLS handshake**.
+   * Session key is generated for encrypted communication.
+5. Data is now encrypted and secure.
+
+---
+
+### 2.3 **Types of SSL Certificates**
+
+1. **DV** – Domain Validation
+2. **OV** – Organization Validation
+3. **EV** – Extended Validation (highest trust)
+
+---
+
+## 3. **HTTPS**
+
+* **HyperText Transfer Protocol Secure** = HTTP + SSL/TLS encryption.
+* Uses **port 443**.
+* Secures:
+
+  * Web traffic
+  * APIs
+  * Data transfer
+
+**Example:**
+
+```text
+http://example.com   ❌ Not secure
+https://example.com  ✅ Secure
+```
+
+---
+
+## 4. **SSH (Secure Shell)**
+
+* Secure protocol for remote system access.
+* Uses **port 22**.
+* Encrypts commands and data.
+* DevOps use cases:
+
+  * Server management
+  * Deployments
+  * Secure file transfer (SCP/SFTP)
+  * Git SSH authentication
+
+**Example:**
+
+```bash
+ssh user@192.168.1.10
+```
+
+---
+
+## 5. **HTTP Status Codes**
+
+HTTP status codes indicate the result of a request.
+
+### **1xx – Informational**
+
+| Code | Meaning             |
+| ---- | ------------------- |
+| 100  | Continue            |
+| 101  | Switching Protocols |
+| 102  | Processing          |
+| 103  | Early Hints         |
+
+---
+
+### **2xx – Success**
+
+| Code | Meaning         |
+| ---- | --------------- |
+| 200  | OK              |
+| 201  | Created         |
+| 202  | Accepted        |
+| 204  | No Content      |
+| 206  | Partial Content |
+
+---
+
+### **3xx – Redirection**
+
+| Code | Meaning            |
+| ---- | ------------------ |
+| 301  | Moved Permanently  |
+| 302  | Found              |
+| 304  | Not Modified       |
+| 307  | Temporary Redirect |
+| 308  | Permanent Redirect |
+
+---
+
+### **4xx – Client Errors**
+
+| Code | Meaning                       |
+| ---- | ----------------------------- |
+| 400  | Bad Request                   |
+| 401  | Unauthorized                  |
+| 403  | Forbidden                     |
+| 404  | Not Found                     |
+| 405  | Method Not Allowed            |
+| 429  | Too Many Requests             |
+| 451  | Unavailable for Legal Reasons |
+
+---
+
+### **5xx – Server Errors**
+
+| Code | Meaning               |
+| ---- | --------------------- |
+| 500  | Internal Server Error |
+| 502  | Bad Gateway           |
+| 503  | Service Unavailable   |
+| 504  | Gateway Timeout       |
+| 507  | Insufficient Storage  |
+
+---
+
+## 6. **CORS (Cross-Origin Resource Sharing)**
+
+### 6.1 **The Problem**
+
+Browsers follow **Same-Origin Policy** –
+A website can only request resources from the same domain unless explicitly allowed.
+
+---
+
+### 6.2 **How CORS Works**
+
+* The target server sends **CORS headers** to allow cross-origin requests.
+* Example:
+
+```http
+Access-Control-Allow-Origin: https://myapp.com
+```
+
+---
+
+### 6.3 **Preflight Requests**
+
+For certain requests, the browser first sends an `OPTIONS` request to check:
+
+* Allowed origins
+* Allowed methods
+* Allowed headers
+
+---
+
+### 6.4 **Common CORS Headers**
+
+| Header                           | Purpose                                 |
+| -------------------------------- | --------------------------------------- |
+| Access-Control-Allow-Origin      | Specifies allowed origins               |
+| Access-Control-Allow-Methods     | Specifies allowed HTTP methods          |
+| Access-Control-Allow-Headers     | Specifies allowed custom headers        |
+| Access-Control-Allow-Credentials | Whether cookies/credentials can be sent |
+
+---
+
+### 6.5 **Example in Node.js**
+
+```javascript
+import express from 'express';
+import cors from 'cors';
+
+const app = express();
+
+app.use(cors({
+  origin: 'https://myapp.com',
+  methods: ['GET', 'POST'],
+  credentials: true
+}));
+
+app.get('/data', (req, res) => {
+  res.json({ message: 'CORS enabled!' });
+});
+
+app.listen(3000);
+```
+

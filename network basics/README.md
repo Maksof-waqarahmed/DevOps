@@ -1,4 +1,4 @@
-# 📄 README – Domain & DNS (Networking + Internet + DevOps Perspective)
+# 📄 README – Domain, DNS & Hosting
 
 ## **1. What is a Domain?**
 
@@ -153,20 +153,7 @@ Caching helps speed up the process:
 
 ---
 
-## **10. DevOps Perspective**
-
-In DevOps, domains are critical for:
-
-* **Deployment** – Making an app accessible via a domain instead of an IP.
-* **DNS Configuration** – Managing records in cloud DNS services (AWS Route53, Azure DNS, Cloudflare).
-* **SSL/TLS Certificates** – Enabling HTTPS using domain-based security.
-* **Load Balancers & Reverse Proxies** – Serving multiple servers via one domain.
-* **CI/CD** – Automatically pointing domains after deployments.
-* **Environment Mapping** – Example: `staging.bnoqabi.pk`, `dev.bnoqabi.pk`
-
----
-
-## **11. CLI DNS Tools**
+## **10. CLI DNS Tools**
 
 Check DNS records from terminal:
 
@@ -192,7 +179,7 @@ dig ns bnoqabi.pk
 
 ---
 
-## **12. DNS Resolution Diagram**
+## **11. DNS Resolution Diagram**
 
 ```mermaid
 graph TD
